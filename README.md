@@ -20,7 +20,7 @@ m.dump()
 
 **Into this...**
 
-![Swiftbarmenu Screenshot](./images/swiftbarmenu.png)
+![Swiftbarmenu Screenshot](https://raw.githubusercontent.com/sdelquin/swiftbarmenu/main/images/swiftbarmenu.png)
 
 ## Installation
 
