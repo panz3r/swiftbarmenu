@@ -57,8 +57,8 @@ class Menu(MenuItem):
         self.header_last = 0
         if text:
             self.add_item(text, **params)
-            self.add_sep()
             self.header_last = 1
+        self.add_sep()
 
     def add_header(self, text, **params) -> MenuItem:
         if params.pop('sep', False):
@@ -68,6 +68,8 @@ class Menu(MenuItem):
         return item
 
     def render(self) -> str:  # type: ignore
+        if not self.header:
+            raise ValueError('Menu must have a header')
         return ITEMS_SEP.join([item.render() for item in self.items])
 
     def dump(self) -> None:

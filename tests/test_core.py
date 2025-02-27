@@ -84,6 +84,15 @@ def test_clear_header():
     assert m.header == []
 
 
+def test_menu_fails_when_no_header():
+    m = Menu()
+    m.add_item('Item 1')
+    m.add_item('Item 2')
+    with pytest.raises(ValueError) as err:
+        m.dump()
+    assert str(err.value) == 'Menu must have a header'
+
+
 # ==============================================================================
 # BODY
 # ==============================================================================

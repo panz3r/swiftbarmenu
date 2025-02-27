@@ -322,3 +322,19 @@ My menu
 ---
 Item 1
 ```
+
+## Changelog
+
+Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
+
+## 0.1.1
+
+Released 2025-02-27
+
+- Fixes menus with no header.
+
+## 0.1.0
+
+Released 2025-02-26
+
+- First release.
