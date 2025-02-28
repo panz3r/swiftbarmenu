@@ -348,6 +348,12 @@ Item 1
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
 
+## 0.1.2
+
+Released 2025-02-28
+
+- Add feature to include images using path.
+
 ## 0.1.1
 
 Released 2025-02-27
