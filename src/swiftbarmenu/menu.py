@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import base64
+
 PARAMS_SEP = '|'
 NESTED_SEP = '--'
 ITEMS_SEP = '\n'
@@ -29,6 +31,11 @@ class MenuItem:
 
     def add_link(self, text, href, **params) -> MenuItem:
         return self.add_item(text, href=href, **params)
+
+    def add_image(self, image_path, text='', **params) -> MenuItem:
+        with open(image_path, 'rb') as f:
+            base64_image = base64.b64encode(f.read()).decode('utf-8')
+        return self.add_item(text, image=base64_image, **params)
 
     def render(self, depth=0) -> str:
         rendered_params = ' '.join(f'{k}={v}' for k, v in self.params.items())

@@ -3,8 +3,9 @@ import sys
 sys.path.append('.')
 from src.swiftbarmenu import Menu
 
-m = Menu()
+m = Menu('Test')
 m.add_item('Item 1')
+m.add_image('tests/images/parrot.png', 'Parrot')
 item2 = m.add_item('Item 2', sep=True, checked=True)
 item2.add_item('Subitem 1')
 item2.add_item('Subitem 2')
