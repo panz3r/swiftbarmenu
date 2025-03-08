@@ -348,6 +348,12 @@ Item 1
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
 
+## 0.1.3
+
+Released 2025-03-08
+
+- Add Mypy compatibility.
+
 ## 0.1.2
 
 Released 2025-02-28
