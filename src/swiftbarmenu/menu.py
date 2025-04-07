@@ -77,6 +77,9 @@ class Menu(MenuItem):
         self.header_last += 1
         return item
 
+    def add_action_refresh(self, text='Refresh...', **params) -> MenuItem:
+        return self.add_item(text, refresh='true', terminal='false', **params)
+
     def render(self) -> str:  # type: ignore
         if not self.header:
             raise ValueError('Menu must have a header')
