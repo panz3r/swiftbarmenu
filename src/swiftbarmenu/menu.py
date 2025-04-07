@@ -41,9 +41,12 @@ class MenuItem:
         rendered_params = ' '.join(f'{k}={v}' for k, v in self.params.items())
         sep1 = ' ' if depth > 0 else ''
         sep2 = PARAMS_SEP if rendered_params else ''
-        title = (NESTED_SEP * depth) + sep1 + self.text + sep2 + rendered_params
+        title = (NESTED_SEP * depth) + sep1 + \
+            self.text + sep2 + rendered_params
         sep = ITEMS_SEP if self.items else ''
-        return title + sep + ITEMS_SEP.join([item.render(depth + 1) for item in self.items])
+        return title + sep + ITEMS_SEP.join([
+            item.render(depth + 1) for item in self.items
+        ])
 
     def clear(self) -> None:
         self.items.clear()
@@ -88,4 +91,4 @@ class Menu(MenuItem):
 
     @property
     def body(self) -> list[MenuItem]:
-        return self.items[self.header_last + 1 :]
+        return self.items[self.header_last + 1:]
