@@ -1,3 +1,4 @@
+import os
 import pytest
 
 from src.swiftbarmenu import Menu, MenuItem
@@ -331,5 +332,175 @@ Header
 ---
 ---
 Reload...|refresh=true terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action(capsys, monkeypatch):
+    monkeypatch.setenv("SWIFTBAR_PLUGIN_PATH",
+                       "/usr/local/swiftbar_plugins/test_plugin.1h.py")
+
+    m = Menu('My menu')
+    m.add_action("Test action...", ["test"])
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action_with_sep(capsys, monkeypatch):
+    monkeypatch.setenv("SWIFTBAR_PLUGIN_PATH",
+                       "/usr/local/swiftbar_plugins/test_plugin.1h.py")
+
+    m = Menu('My menu')
+    m.add_action("Test action...", ["test"], sep=True)
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+---
+Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action_custom_script(capsys):
+    m = Menu('My menu')
+    m.add_action("Echo action...", bash="/bin/echo", action_params=["test"])
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+Echo action...|bash=/bin/echo param0=test refresh=false terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action_custom_script_with_sep(capsys):
+    m = Menu('My menu')
+    m.add_action("Echo action...",
+                 bash="/bin/echo", action_params=["test"],
+                 sep=True)
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+---
+Echo action...|bash=/bin/echo param0=test refresh=false terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action_custom_script_in_terminal(capsys):
+    m = Menu('My menu')
+    m.add_action("Echo action...",
+                 bash="/bin/echo", action_params=["test"], terminal="true")
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+Echo action...|bash=/bin/echo param0=test refresh=false terminal=true
+""".lstrip()
+    )
+
+
+def test_add_action_custom_script_in_terminal_with_sep(capsys):
+    m = Menu('My menu')
+    m.add_action("Echo action...",
+                 bash="/bin/echo", action_params=["test"], terminal="true",
+                 sep=True)
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+---
+Echo action...|bash=/bin/echo param0=test refresh=false terminal=true
+""".lstrip()
+    )
+
+
+def test_add_action_multiple_parameters(capsys, monkeypatch):
+    monkeypatch.setenv("SWIFTBAR_PLUGIN_PATH",
+                       "/usr/local/swiftbar_plugins/test_plugin.1h.py")
+
+    m = Menu('My menu')
+    m.add_action("Test action...", ["test", "action", "parameters"])
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test param1=action param2=parameters refresh=false terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action_multiple_parameters_with_sep(capsys, monkeypatch):
+    monkeypatch.setenv("SWIFTBAR_PLUGIN_PATH",
+                       "/usr/local/swiftbar_plugins/test_plugin.1h.py")
+
+    m = Menu('My menu')
+    m.add_action("Test action...", ["test", "action", "parameters"], sep=True)
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+---
+Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test param1=action param2=parameters refresh=false terminal=false
+""".lstrip()
+    )
+
+
+def test_add_action_nested(capsys, monkeypatch):
+    monkeypatch.setenv("SWIFTBAR_PLUGIN_PATH",
+                       "/usr/local/swiftbar_plugins/test_plugin.1h.py")
+
+    m = Menu('My menu')
+    i1 = m.add_item("Item 1")
+    i1.add_action("Test action...", ["test"])
+
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+My menu
+---
+Item 1
+-- Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
 """.lstrip()
     )
