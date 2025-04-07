@@ -224,6 +224,63 @@ You can explicitly add a separator using:
 ---
 ```
 
+### Add actions
+
+Add action items to the Menu, when clicked a script will be invoked with the provided params:
+
+```pycon
+>>> from swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> m.add_action("Test action...", ["test"])
+Test action...
+
+>>> m.dump()
+My menu
+---
+Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
+```
+
+> [!NOTE]
+> By default, this action will execute the current plugin script (if one is not specified using the `bash` parameter) in background passing the provided parameters.
+
+
+#### Custom script
+
+Pass `bash` parameter to customize the script to be executed:
+
+```pycon
+>>> from swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> m.add_action("Echo action...", bash="/bin/echo", action_params=["test"])
+
+>>> m.dump()
+My menu
+---
+Echo action...|bash=/bin/echo param0=test refresh=false terminal=false
+```
+
+
+#### Nested actions
+
+Action items can also be nested inside other Menu items:
+
+```pycon
+>>> from swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> item1 = m.add_item('Item 1')
+>>> item1.add_action("Test action...", ["test"])
+
+>>> m.dump()
+My menu
+---
+Item 1
+-- Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
+```
+
+
 ### Add "Refresh" action
 
 Add a "Refresh..." action to the Menu, when clicked a refresh of the plugin will be triggered
