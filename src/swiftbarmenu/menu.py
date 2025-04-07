@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import base64
+import os
+import sys
 
 PARAMS_SEP = '|'
 NESTED_SEP = '--'
 ITEMS_SEP = '\n'
 BLOCK_SEP = '---'
+PARAM_PREFIX = 'param'
 
 
 class MenuItem:
@@ -36,6 +39,21 @@ class MenuItem:
         with open(image_path, 'rb') as f:
             base64_image = base64.b64encode(f.read()).decode('utf-8')
         return self.add_item(text, image=base64_image, **params)
+
+    def add_action(self, text, action_params: list[str], **params) -> MenuItem:
+        action_params_mapped = {
+            f'{PARAM_PREFIX}{idx}': param for idx, param in enumerate(action_params)
+        }
+
+        combined_params = {
+            'bash': os.getenv('SWIFTBAR_PLUGIN_PATH', sys.argv[0]),
+            **action_params_mapped,
+            'refresh': 'false',
+            'terminal': 'false',
+            **params
+        }
+
+        return self.add_item(text, **combined_params)
 
     def render(self, depth=0) -> str:
         rendered_params = ' '.join(f'{k}={v}' for k, v in self.params.items())
