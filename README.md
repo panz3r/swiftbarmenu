@@ -221,6 +221,38 @@ You can explicitly add a separator using:
 ---
 ```
 
+### Add "Refresh" action
+
+Add a "Refresh..." action to the Menu, when clicked a refresh of the plugin will be triggered
+
+```pycon
+>>> from src.swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> m.add_action_refresh()
+Refresh...
+>>> m.add_action_refresh("Reload")
+Reload
+>>> m.add_action_refresh(sep=True)
+Refresh...
+>>> m.add_action_refresh("Reload", sep=True)
+Reload
+
+>>> m.dump()
+My menu
+---
+Refresh...|refresh=true terminal=false
+Reload|refresh=true terminal=false
+---
+Refresh...|refresh=true terminal=false
+---
+Reload|refresh=true terminal=false
+```
+
+> [!NOTE]
+> This action will only refresh the current plugin, not all installed plugins.
+
+
 ### Access header and body
 
 Within the menu, you can access the header and the body:
