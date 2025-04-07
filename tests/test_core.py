@@ -317,3 +317,19 @@ Header
 Reload...|refresh=true terminal=false
 """.lstrip()
     )
+
+
+def test_add_action_refresh_customtext_with_sep(capsys):
+    m = Menu('Header')
+    m.add_action_refresh("Reload...", sep=True)
+    m.dump()
+    output = capsys.readouterr()
+    assert (
+        output.out
+        == """
+Header
+---
+---
+Reload...|refresh=true terminal=false
+""".lstrip()
+    )
