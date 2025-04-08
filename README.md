@@ -168,7 +168,7 @@ Cloudy! :cloud.rain:|sfcolor=blue
 ```
 
 > [!NOTE]
-> The parameter `sfcolor` only colorizes _sf symbols_.  
+> The parameter `sfcolor` only colorizes _sf symbols_.
 
 Search _sf symbols_ [here](https://hotpot.ai/free-icons).
 
@@ -244,7 +244,6 @@ Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test re
 > [!NOTE]
 > By default, this action will execute the current plugin script (if one is not specified using the `bash` parameter) in background passing the provided parameters.
 
-
 #### Custom script
 
 Pass `bash` parameter to customize the script to be executed:
@@ -260,7 +259,6 @@ My menu
 ---
 Echo action...|bash=/bin/echo param0=test refresh=false terminal=false
 ```
-
 
 #### Nested actions
 
@@ -279,7 +277,6 @@ My menu
 Item 1
 -- Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
 ```
-
 
 ### Add "Refresh" action
 
@@ -311,7 +308,6 @@ Reload|refresh=true terminal=false
 
 > [!NOTE]
 > This action will only refresh the current plugin, not all installed plugins.
-
 
 ### Access header and body
 
@@ -446,33 +442,34 @@ This method uses the .devcontainer/ configuration for a fully containerized envi
 
 **1. Prerequisites:**
 
-  - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) and ensure it is running.
+- [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) and ensure it is running.
 
-  - [Install Visual Studio Code](https://code.visualstudio.com/).
+- [Install Visual Studio Code](https://code.visualstudio.com/).
 
-  - Install the [Dev Containers extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+- Install the [Dev Containers extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 
 **2. Steps:**
 
-  - Clone this repository
-    ```sh
-    git clone git@github.com:sdelquin/swiftbarmenu.git
-    
-    cd swiftbarmenu
-    ```
+- Clone this repository
 
-  - Open the cloned folder in VS Code
-    ```sh
-    code .
-    ```
+  ```sh
+  git clone git@github.com:sdelquin/swiftbarmenu.git
 
-  - VS Code should prompt you to "Reopen in Container". Click that button. (Alternatively, use the Command Palette: `Ctrl+Shift+P` or `Cmd+Shift+P` and run `Dev Containers: Reopen in Container`).
+  cd swiftbarmenu
+  ```
 
-  - VS Code will build the container (first time only) and reload the window connected to it.
+- Open the cloned folder in VS Code
 
-**3. Outcome:** 
-  You'll be inside the development container with Python `3.x` and all dependencies pre-installed, ready for coding and testing with `pytest` and `pytest-cov`.
+  ```sh
+  code .
+  ```
 
+- VS Code should prompt you to "Reopen in Container". Click that button. (Alternatively, use the Command Palette: `Ctrl+Shift+P` or `Cmd+Shift+P` and run `Dev Containers: Reopen in Container`).
+
+- VS Code will build the container (first time only) and reload the window connected to it.
+
+**3. Outcome:**
+You'll be inside the development container with Python `3.x` and all dependencies pre-installed, ready for coding and testing with `pytest` and `pytest-cov`.
 
 ### Using IntelliJ IDEA with Dev Containers (Local)
 
@@ -480,27 +477,28 @@ Modern versions of IntelliJ IDEA (especially _Ultimate Edition_) have built-in s
 
 **1. Prerequisites:**
 
-  - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) and ensure it is running.
+- [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) and ensure it is running.
 
-  - Install IntelliJ IDEA (check JetBrains documentation for specific version/edition requirements for Dev Container support).
+- Install IntelliJ IDEA (check JetBrains documentation for specific version/edition requirements for Dev Container support).
 
 **2. Steps:**
 
-  - Clone this repository
-    ```sh
-    git clone git@github.com:sdelquin/swiftbarmenu.git
-    
-    cd swiftbarmenu
-    ```
+- Clone this repository
 
-  - Open the cloned repository folder as a project in IntelliJ IDEA.
+  ```sh
+  git clone git@github.com:sdelquin/swiftbarmenu.git
 
-  - IntelliJ _may_ automatically detect the `devcontainer.json` file and offer to create the environment. Follow the IDE prompts.
+  cd swiftbarmenu
+  ```
 
-  - If not automatically detected, consult the [official JetBrains documentation on Dev Containers](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html) for the specific steps to initiate the Dev Container environment for your version.
+- Open the cloned repository folder as a project in IntelliJ IDEA.
+
+- IntelliJ _may_ automatically detect the `devcontainer.json` file and offer to create the environment. Follow the IDE prompts.
+
+- If not automatically detected, consult the [official JetBrains documentation on Dev Containers](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html) for the specific steps to initiate the Dev Container environment for your version.
 
 **3. Outcome:**
-  IntelliJ IDEA will manage the containerized environment based on the .devcontainer/ configuration, providing consistency with other methods.
+IntelliJ IDEA will manage the containerized environment based on the .devcontainer/ configuration, providing consistency with other methods.
 
 ### Using GitHub Codespaces (Remote)
 
@@ -508,23 +506,29 @@ This method runs the Dev Container configuration entirely in the cloud via GitHu
 
 **1. Prerequisites:**
 
-  - A GitHub account.
+- A GitHub account.
 
 **2. Steps:**
 
-  - Navigate to the repository on GitHub: https://github.com/sdelquin/swiftbarmenu
+- Navigate to the repository on GitHub: https://github.com/sdelquin/swiftbarmenu
 
-  - Click the green `<> Code` button -> **Codespaces** tab.
+- Click the green `<> Code` button -> **Codespaces** tab.
 
-  - Click **"Create codespace on main"**.
+- Click **"Create codespace on main"**.
 
 **3. Outcome:**
-  A VS Code instance opens in your browser (or local VS Code) connected to the pre-configured Codespace environment.
-
+A VS Code instance opens in your browser (or local VS Code) connected to the pre-configured Codespace environment.
 
 ## Changelog
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
+
+## 0.1.4
+
+Released 2025-04-08
+
+- Add development tooling (Dev Containers, Dependabot, GH Actions) via [pull request #1](https://github.com/sdelquin/swiftbarmenu/pull/1) (kudos to [`@panz3r`](https://github.com/panz3r)).
+- Add action items via [pull request #2](https://github.com/sdelquin/swiftbarmenu/pull/2) (kudos to [`@panz3r`](https://github.com/panz3r)).
 
 ## 0.1.3
 
