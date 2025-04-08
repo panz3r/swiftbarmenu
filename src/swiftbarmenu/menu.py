@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import base64
+import os
+import sys
 
 PARAMS_SEP = '|'
 NESTED_SEP = '--'
 ITEMS_SEP = '\n'
 BLOCK_SEP = '---'
+PARAM_PREFIX = 'param'
 
 
 class MenuItem:
@@ -37,13 +40,31 @@ class MenuItem:
             base64_image = base64.b64encode(f.read()).decode('utf-8')
         return self.add_item(text, image=base64_image, **params)
 
+    def add_action(self, text, action_params: list[str], **params) -> MenuItem:
+        action_params_mapped = {
+            f'{PARAM_PREFIX}{idx}': param for idx, param in enumerate(action_params)
+        }
+
+        combined_params = {
+            'bash': os.getenv('SWIFTBAR_PLUGIN_PATH', sys.argv[0]),
+            **action_params_mapped,
+            'refresh': 'false',
+            'terminal': 'false',
+            **params
+        }
+
+        return self.add_item(text, **combined_params)
+
     def render(self, depth=0) -> str:
         rendered_params = ' '.join(f'{k}={v}' for k, v in self.params.items())
         sep1 = ' ' if depth > 0 else ''
         sep2 = PARAMS_SEP if rendered_params else ''
-        title = (NESTED_SEP * depth) + sep1 + self.text + sep2 + rendered_params
+        title = (NESTED_SEP * depth) + sep1 + \
+            self.text + sep2 + rendered_params
         sep = ITEMS_SEP if self.items else ''
-        return title + sep + ITEMS_SEP.join([item.render(depth + 1) for item in self.items])
+        return title + sep + ITEMS_SEP.join([
+            item.render(depth + 1) for item in self.items
+        ])
 
     def clear(self) -> None:
         self.items.clear()
@@ -74,6 +95,9 @@ class Menu(MenuItem):
         self.header_last += 1
         return item
 
+    def add_action_refresh(self, text='Refresh...', **params) -> MenuItem:
+        return self.add_item(text, refresh='true', terminal='false', **params)
+
     def render(self) -> str:  # type: ignore
         if not self.header:
             raise ValueError('Menu must have a header')
@@ -88,4 +112,4 @@ class Menu(MenuItem):
 
     @property
     def body(self) -> list[MenuItem]:
-        return self.items[self.header_last + 1 :]
+        return self.items[self.header_last + 1:]

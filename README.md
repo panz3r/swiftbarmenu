@@ -150,7 +150,7 @@ Item 1
 
 ### Swift icons
 
-You can add [SF Symbols](https://developer.apple.com/sf-symbols/) using `:symbol:`
+You can add [SF Symbols](https://developer.apple.com/sf-symbols/) using `:symbol:` syntax
 
 ```pycon
 >>> from swiftbarmenu import Menu
@@ -167,7 +167,9 @@ Sunny! :sun.max:
 Cloudy! :cloud.rain:|sfcolor=blue
 ```
 
-The parameter `sfcolor` only colorizes _sf symbols_.  
+> [!NOTE]
+> The parameter `sfcolor` only colorizes _sf symbols_.  
+
 Search _sf symbols_ [here](https://hotpot.ai/free-icons).
 
 ### Add images
@@ -189,6 +191,7 @@ It's actually a shortcut for:
 >>> m.add_item('Parrot', image='iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAJZlWElmTU0AKgAAAAgABQEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAAExAAIAAAARAAAAWodpAAQAAAABAAAAbAAAAAAAAABgAAAAAQAAAGAAAAABd3d3Lmlua3NjYXBlLm9yZwAAAAOgAQADAAAAAQABAACgAgAEAAAAAQAAABCgAwAEAAAAAQAAABAAAAAA4+VmVAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAWRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDYuMC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD53d3cuaW5rc2NhcGUub3JnPC94bXA6Q3JlYXRvclRvb2w+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgqyyWIhAAACL0lEQVQ4Eb1TXUiTURh+ztn2bW7OmGa2DAIpt8ogRxS0q6Ifbyy88MIuEoIgUOznIop+WAWSlGHSTdBVN10s6C6Tlo0i+5EULFhQ68fSOecmubl92/fz9m06ZrHVXS8cznue93le3vc95wD/NpaApeYLYCpGZcXAPDazfXdr+ZrVJ3UNTofu2/eg7uvEQfZ8MJSPZ3f98kPBJ5bY2txltgp9ZC3Hu+YmsESiUuDsEHYN9hZ4RRLceIJagQynfcFVHY2j62EbTyFwqdvLjx2pd9bVTS0XZ/3fWuh/hQpZxFOjGa6EAqyYMqHlphsVcb7nx8O74xvs9sifCXge8BC4kkG/YIIrk9RKk7WV0iOjUjAZ148UE2e1uRl0+1AlPMJ1ZkR7fB6ILVQjGnbguJ/9XDvHO9inAQ0tbrkWLpzYcipkcvQOiW5EpVpY5JXomnyG+tTwyxc23T0DIQ2oUUllYUlSwjqJR8fS6Xm/3y8zELF9h/uuTNt3nuPVNWiqHEHDzOjbhfH3iZjZ6OYK6VUVcwCZGGNlinZQFDVGoJAsqUdzFfQccFsjnXcet22c2OGKDMSASSdzeSO3O9uc2hAkbZyzekG2iKroIKK9pNJ+znhjWlZalm6B+Pmx0OuLVfe3GeLJs2zzmavFO15EPR4Pt00HNqVFdXYRaaWyB2+8PgpcFunzrXV/E5eIEcsEetrpw7XhEoSS8NI7YGQAfdRYQyWZJQKFvyBRAEZZG9h/tl+8ztuKYW6OWAAAAABJRU5ErkJggg==')
 ```
 
+> [!TIP]
 > 💡 16x16 pixels is a nice size for menu images.
 
 ### Add separators
@@ -220,6 +223,95 @@ You can explicitly add a separator using:
 >>> m.add_sep()
 ---
 ```
+
+### Add actions
+
+Add action items to the Menu, when clicked a script will be invoked with the provided params:
+
+```pycon
+>>> from swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> m.add_action("Test action...", ["test"])
+Test action...
+
+>>> m.dump()
+My menu
+---
+Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
+```
+
+> [!NOTE]
+> By default, this action will execute the current plugin script (if one is not specified using the `bash` parameter) in background passing the provided parameters.
+
+
+#### Custom script
+
+Pass `bash` parameter to customize the script to be executed:
+
+```pycon
+>>> from swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> m.add_action("Echo action...", bash="/bin/echo", action_params=["test"])
+
+>>> m.dump()
+My menu
+---
+Echo action...|bash=/bin/echo param0=test refresh=false terminal=false
+```
+
+
+#### Nested actions
+
+Action items can also be nested inside other Menu items:
+
+```pycon
+>>> from swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> item1 = m.add_item('Item 1')
+>>> item1.add_action("Test action...", ["test"])
+
+>>> m.dump()
+My menu
+---
+Item 1
+-- Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
+```
+
+
+### Add "Refresh" action
+
+Add a "Refresh..." action to the Menu, when clicked a refresh of the plugin will be triggered
+
+```pycon
+>>> from src.swiftbarmenu import Menu
+
+>>> m = Menu('My menu')
+>>> m.add_action_refresh()
+Refresh...
+>>> m.add_action_refresh("Reload")
+Reload
+>>> m.add_action_refresh(sep=True)
+Refresh...
+>>> m.add_action_refresh("Reload", sep=True)
+Reload
+
+>>> m.dump()
+My menu
+---
+Refresh...|refresh=true terminal=false
+Reload|refresh=true terminal=false
+---
+Refresh...|refresh=true terminal=false
+---
+Reload|refresh=true terminal=false
+```
+
+> [!NOTE]
+> This action will only refresh the current plugin, not all installed plugins.
+
 
 ### Access header and body
 
