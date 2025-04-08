@@ -19,7 +19,7 @@ clean:
 
 # Open project url at PyPI
 open-pypi:
-    open https://pypi.org/project/pypas-cli/
+    open https://pypi.org/project/swiftbarmenu/
 
 # Test project
 test:

@@ -344,6 +344,92 @@ My menu
 Item 1
 ```
 
+## Development
+
+To ensure a consistent and easy-to-set-up development environment, this project provides multiple options, including configuration for [Dev Containers](https://containers.dev/).
+
+### Using VS Code with Dev Containers (Local)
+
+This method uses the .devcontainer/ configuration for a fully containerized environment managed by VS Code. It requires Docker Desktop and VS Code installed locally.
+
+**1. Prerequisites:**
+
+  - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) and ensure it is running.
+
+  - [Install Visual Studio Code](https://code.visualstudio.com/).
+
+  - Install the [Dev Containers extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+
+**2. Steps:**
+
+  - Clone this repository
+    ```sh
+    git clone git@github.com:sdelquin/swiftbarmenu.git
+    
+    cd swiftbarmenu
+    ```
+
+  - Open the cloned folder in VS Code
+    ```sh
+    code .
+    ```
+
+  - VS Code should prompt you to "Reopen in Container". Click that button. (Alternatively, use the Command Palette: `Ctrl+Shift+P` or `Cmd+Shift+P` and run `Dev Containers: Reopen in Container`).
+
+  - VS Code will build the container (first time only) and reload the window connected to it.
+
+**3. Outcome:** 
+  You'll be inside the development container with Python `3.x` and all dependencies pre-installed, ready for coding and testing with `pytest` and `pytest-cov`.
+
+
+### Using IntelliJ IDEA with Dev Containers (Local)
+
+Modern versions of IntelliJ IDEA (especially _Ultimate Edition_) have built-in support for Dev Containers, allowing you to use the same `.devcontainer/` configuration as VS Code.
+
+**1. Prerequisites:**
+
+  - [Install Docker Desktop](https://www.docker.com/products/docker-desktop/) and ensure it is running.
+
+  - Install IntelliJ IDEA (check JetBrains documentation for specific version/edition requirements for Dev Container support).
+
+**2. Steps:**
+
+  - Clone this repository
+    ```sh
+    git clone git@github.com:sdelquin/swiftbarmenu.git
+    
+    cd swiftbarmenu
+    ```
+
+  - Open the cloned repository folder as a project in IntelliJ IDEA.
+
+  - IntelliJ _may_ automatically detect the `devcontainer.json` file and offer to create the environment. Follow the IDE prompts.
+
+  - If not automatically detected, consult the [official JetBrains documentation on Dev Containers](https://www.jetbrains.com/help/idea/connect-to-devcontainer.html) for the specific steps to initiate the Dev Container environment for your version.
+
+**3. Outcome:**
+  IntelliJ IDEA will manage the containerized environment based on the .devcontainer/ configuration, providing consistency with other methods.
+
+### Using GitHub Codespaces (Remote)
+
+This method runs the Dev Container configuration entirely in the cloud via GitHub.
+
+**1. Prerequisites:**
+
+  - A GitHub account.
+
+**2. Steps:**
+
+  - Navigate to the repository on GitHub: https://github.com/sdelquin/swiftbarmenu
+
+  - Click the green `<> Code` button -> **Codespaces** tab.
+
+  - Click **"Create codespace on main"**.
+
+**3. Outcome:**
+  A VS Code instance opens in your browser (or local VS Code) connected to the pre-configured Codespace environment.
+
+
 ## Changelog
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
