@@ -4,14 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "swiftbarmenu"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = []
 requires-python = ">=3.9"
-authors = [
-    { name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" }
-]
+authors = [{ name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" }]
 maintainers = [
-    { name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" }
+    { name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" },
 ]
 description = "Easy menu building for SwiftBar (... and xbar)"
 readme = "README.md"

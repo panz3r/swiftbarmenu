@@ -33,11 +33,11 @@ Check out [uv](https://docs.astral.sh/uv/)!
 ## Usage
 
 This module offers the following features:
+
 - [Menu](#menu) to display SwiftBar menus
 - [Notifications](#notification) to show notifications from a SwiftBar plugin
 
 Check out the features through basic examples below.
-
 
 ### Menu
 
@@ -439,7 +439,6 @@ My menu
 Item 1
 ```
 
-
 ### Notification
 
 #### Basic usage
@@ -473,7 +472,6 @@ To trigger notifications without sound, just pass the `silent` parameter to `.sh
 >>> n.show(True) # pass True to show silently
 Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')
 ```
-
 
 ## Development
 
@@ -565,6 +563,12 @@ A VS Code instance opens in your browser (or local VS Code) connected to the pre
 ## Changelog
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
+
+### 0.1.5
+
+Released 2025-04-09
+
+- Add Notification functionality via [pull request #3](https://github.com/sdelquin/swiftbarmenu/pull/3) (kudos to [`@panz3r`](https://github.com/panz3r))
 
 ### 0.1.4
 
