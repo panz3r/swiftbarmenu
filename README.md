@@ -184,7 +184,7 @@ Search _sf symbols_ [here](https://hotpot.ai/free-icons).
 It's pretty simple to add an image (**using path not base64**) to a menu item:
 
 ```pycon
->>> from src.swiftbarmenu import Menu
+>>> from swiftbarmenu import Menu
 
 >>> m = Menu('My menu')
 
@@ -290,7 +290,7 @@ Item 1
 Add a "Refresh..." action to the Menu, when clicked a refresh of the plugin will be triggered
 
 ```pycon
->>> from src.swiftbarmenu import Menu
+>>> from swiftbarmenu import Menu
 
 >>> m = Menu('My menu')
 >>> m.add_action_refresh()
@@ -321,7 +321,7 @@ Reload|refresh=true terminal=false
 Within the menu, you can access the header and the body:
 
 ```pycon
->>> from src.swiftbarmenu import Menu
+>>> from swiftbarmenu import Menu
 
 >>> m = Menu('My menu')
 >>> m.add_header('Header 2')
@@ -359,7 +359,7 @@ True
 Even with nested items:
 
 ```pycon
->>> from src.swiftbarmenu import Menu
+>>> from swiftbarmenu import Menu
 
 >>> m = Menu('My menu')
 
@@ -380,7 +380,7 @@ Item 1.3
 You can clear whole menu:
 
 ```pycon
->>> from src.swiftbarmenu import Menu
+>>> from swiftbarmenu import Menu
 
 >>> m = Menu('My menu')
 >>> m.add_header('Header 2')
@@ -412,7 +412,7 @@ Item 2
 You can also clear nested items for a certain item:
 
 ```pycon
->>> from src.swiftbarmenu import Menu
+>>> from swiftbarmenu import Menu
 
 >>> m = Menu('My menu')
 >>> item1 = m.add_item('Item 1')
