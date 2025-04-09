@@ -566,32 +566,32 @@ A VS Code instance opens in your browser (or local VS Code) connected to the pre
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
 
-## 0.1.4
+### 0.1.4
 
 Released 2025-04-08
 
 - Add development tooling (Dev Containers, Dependabot, GH Actions) via [pull request #1](https://github.com/sdelquin/swiftbarmenu/pull/1) (kudos to [`@panz3r`](https://github.com/panz3r)).
 - Add action items via [pull request #2](https://github.com/sdelquin/swiftbarmenu/pull/2) (kudos to [`@panz3r`](https://github.com/panz3r)).
 
-## 0.1.3
+### 0.1.3
 
 Released 2025-03-08
 
 - Add Mypy compatibility.
 
-## 0.1.2
+### 0.1.2
 
 Released 2025-02-28
 
 - Add feature to include images using path.
 
-## 0.1.1
+### 0.1.1
 
 Released 2025-02-27
 
 - Fixes menus with no header.
 
-## 0.1.0
+### 0.1.0
 
 Released 2025-02-26
 
