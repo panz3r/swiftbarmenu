@@ -32,9 +32,16 @@ Check out [uv](https://docs.astral.sh/uv/)!
 
 ## Usage
 
+This module offers the following features:
+- [Menu](#menu) to display SwiftBar menus
+- [Notifications](#notification) to show notifications from a SwiftBar plugin
+
 Check out the features through basic examples below.
 
-### Basic menu
+
+### Menu
+
+#### Basic menu
 
 ```pycon
 >>> from swiftbarmenu import Menu
@@ -64,7 +71,7 @@ True
 'Item 1'
 ```
 
-### Multiple header
+#### Multiple header
 
 ```pycon
 >>> from swiftbarmenu import Menu
@@ -81,7 +88,7 @@ Header 3
 ---
 ```
 
-### Add parameters
+#### Add parameters
 
 You can add multiple [parameters](https://github.com/swiftbar/SwiftBar?tab=readme-ov-file#parameters):
 
@@ -105,7 +112,7 @@ Item 1|color=orange size=18 checked=True
 >>>
 ```
 
-### Add links
+#### Add links
 
 ```python
 >>> from swiftbarmenu import Menu
@@ -126,7 +133,7 @@ It's actually a shortcut for:
 GitHub|href=https://github.com
 ```
 
-### Nested items
+#### Nested items
 
 ```pycon
 >>> from swiftbarmenu import Menu
@@ -148,7 +155,7 @@ Item 1
 -- Item 1.3
 ```
 
-### Swift icons
+#### Swift icons
 
 You can add [SF Symbols](https://developer.apple.com/sf-symbols/) using `:symbol:` syntax
 
@@ -172,7 +179,7 @@ Cloudy! :cloud.rain:|sfcolor=blue
 
 Search _sf symbols_ [here](https://hotpot.ai/free-icons).
 
-### Add images
+#### Add images
 
 It's pretty simple to add an image (**using path not base64**) to a menu item:
 
@@ -194,7 +201,7 @@ It's actually a shortcut for:
 > [!TIP]
 > 💡 16x16 pixels is a nice size for menu images.
 
-### Add separators
+#### Add separators
 
 A separator is a thin long line on the menu:
 
@@ -224,7 +231,7 @@ You can explicitly add a separator using:
 ---
 ```
 
-### Add actions
+#### Add actions
 
 Add action items to the Menu, when clicked a script will be invoked with the provided params:
 
@@ -244,7 +251,7 @@ Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test re
 > [!NOTE]
 > By default, this action will execute the current plugin script (if one is not specified using the `bash` parameter) in background passing the provided parameters.
 
-#### Custom script
+##### Custom script
 
 Pass `bash` parameter to customize the script to be executed:
 
@@ -260,7 +267,7 @@ My menu
 Echo action...|bash=/bin/echo param0=test refresh=false terminal=false
 ```
 
-#### Nested actions
+##### Nested actions
 
 Action items can also be nested inside other Menu items:
 
@@ -278,7 +285,7 @@ Item 1
 -- Test action...|bash=/usr/local/swiftbar_plugins/test_plugin.1h.py param0=test refresh=false terminal=false
 ```
 
-### Add "Refresh" action
+#### Add "Refresh" action
 
 Add a "Refresh..." action to the Menu, when clicked a refresh of the plugin will be triggered
 
@@ -309,7 +316,7 @@ Reload|refresh=true terminal=false
 > [!NOTE]
 > This action will only refresh the current plugin, not all installed plugins.
 
-### Access header and body
+#### Access header and body
 
 Within the menu, you can access the header and the body:
 
@@ -368,7 +375,7 @@ Item 1.3
 Item 1.3
 ```
 
-### Clear items
+#### Clear items
 
 You can clear whole menu:
 
@@ -431,6 +438,42 @@ My menu
 ---
 Item 1
 ```
+
+
+### Notification
+
+#### Basic usage
+
+To create and show notifications from a SwiftBar plugin, do the following:
+
+```pycon
+>>> from swiftbarmenu import Notification
+
+>>> n = Notification("Title", "Subtitle", "Body", "https://example.com")
+
+>>> n.show()
+Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')
+
+>>> n
+Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')
+```
+
+> [!NOTE]
+> All parameters except for `title` are optional.
+
+#### Silent notifications
+
+To trigger notifications without sound, just pass the `silent` parameter to `.show()` method
+
+```pycon
+>>> from swiftbarmenu import Notification
+
+>>> n = Notification("Title", "Subtitle", "Body", "https://example.com")
+
+>>> n.show(True) # pass True to show silently
+Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')
+```
+
 
 ## Development
 
