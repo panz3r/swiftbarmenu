@@ -3,6 +3,18 @@ import os
 from src.swiftbarmenu import Notification
 
 
+def test_notification_str():
+    n = Notification('Title', 'Subtitle', 'Body', 'https://example.com')
+
+    assert n.__str__() == "Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')"
+
+
+def test_notification_repr():
+    n = Notification('Title', 'Subtitle', 'Body', 'https://example.com')
+
+    assert n.__repr__() == "Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')"
+
+
 def test_notification_full(mocker, monkeypatch):
     # Arrange
     monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH',
