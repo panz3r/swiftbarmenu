@@ -37,3 +37,9 @@ class Notification:
         os.system("open -g 'swiftbar://notify?%s'" % query)
 
         return self
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return f"Notification(title='{self.title}', subtitle='{self.subtitle}', body='{self.body}', href='{self.href}')"
