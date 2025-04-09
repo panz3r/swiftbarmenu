@@ -5,18 +5,18 @@ build-backend = "hatchling.build"
 [project]
 name = "swiftbarmenu"
 version = "0.1.4"
-license = { file = "LICENSE" }
 dependencies = []
+requires-python = ">=3.9"
 authors = [
-    { email = "sdelquin@gmail.com" },
-    { name = "Sergio Delgado Quintero" },
+    { name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" }
 ]
 maintainers = [
-    { name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" },
+    { name = "Sergio Delgado Quintero", email = "sdelquin@gmail.com" }
 ]
 description = "Easy menu building for SwiftBar (... and xbar)"
 readme = "README.md"
-requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -26,6 +26,7 @@ classifiers = [
 [project.urls]
 homepage = "https://github.com/sdelquin/swiftbarmenu"
 repository = "https://github.com/sdelquin/swiftbarmenu"
+issues = "https://github.com/sdelquin/swiftbarmenu/issues"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
