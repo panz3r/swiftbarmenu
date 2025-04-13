@@ -82,6 +82,30 @@ def test_persistence_load_nofile(monkeypatch, tmp_path):
     assert stored_data == {}
 
 
+def test_persistence_clear(monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    sample_data = {
+        "data": "test",
+    }
+
+    p = Persistence()
+    p.save(sample_data)
+
+    assert (plugin_data_p / "data.pkl").exists()
+
+    # Act
+    p.clear()
+
+    # Assert
+    assert not (plugin_data_p / "data.pkl").exists()
+
+
 def test_persistence_save_custom_name(monkeypatch, tmp_path):
     # Arrange
     plugin_data_p = tmp_path / "test.1h.py"
@@ -147,3 +171,27 @@ def test_persistence_load_custom_name_nofile(monkeypatch, tmp_path):
 
     # Assert
     assert stored_data == {}
+
+
+def test_persistence_clear_custom_name(monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    sample_data = {
+        "data": "test",
+    }
+
+    p = Persistence("test")
+    p.save(sample_data)
+
+    assert (plugin_data_p / "test.pkl").exists()
+
+    # Act
+    p.clear()
+
+    # Assert
+    assert not (plugin_data_p / "test.pkl").exists()
