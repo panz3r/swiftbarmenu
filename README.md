@@ -495,8 +495,14 @@ To store (and later load) data for a SwiftBar plugin, do the following:
 >>> p.save(sample_data)
 
 >>> stored_data = p.load()
->>> store_data
+>>> stored_data
 {'data': 'test', 'nested': {'data1': 'test', 'data2': 'test'}}
+
+>>> p.clear()
+
+>>> stored_data = p.load()
+>>> stored_data
+{}
 ```
 
 > [!NOTE]
@@ -522,8 +528,14 @@ To store (and later load) data for a SwiftBar plugin with a specific name, do th
 >>> p.save(sample_data)
 
 >>> stored_data = p.load()
->>> store_data
+>>> stored_data
 {'data': 'test', 'nested': {'data1': 'test', 'data2': 'test'}}
+
+>>> p.clear()
+
+>>> stored_data = p.load()
+>>> stored_data
+{}
 ```
 
 ## Development
