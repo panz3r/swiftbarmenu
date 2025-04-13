@@ -40,6 +40,11 @@ class Persistence:
         with self.file_path.open('rb') as file:
             return pickle.load(file)
 
+    def clear(self) -> None:
+        """Remove the data file if it exists."""
+        if self.file_path.exists():
+            self.file_path.unlink()
+
     def __repr__(self):
         return self.__str__()
 
