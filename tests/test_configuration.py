@@ -108,7 +108,6 @@ def test_configuration_section_multiple():
 
 
 def test_configuration_section_set_str():
-
     # Arrange
     c = Configuration()
 
@@ -121,7 +120,6 @@ def test_configuration_section_set_str():
 
 
 def test_configuration_section_set_int():
-
     # Arrange
     c = Configuration()
 
@@ -134,7 +132,6 @@ def test_configuration_section_set_int():
 
 
 def test_configuration_section_set_float():
-
     # Arrange
     c = Configuration()
 
@@ -147,7 +144,6 @@ def test_configuration_section_set_float():
 
 
 def test_configuration_section_set_boolean():
-
     # Arrange
     c = Configuration()
 
@@ -160,7 +156,6 @@ def test_configuration_section_set_boolean():
 
 
 def test_configuration_section_set_multiple():
-
     # Arrange
     c = Configuration()
 
