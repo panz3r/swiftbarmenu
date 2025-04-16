@@ -36,6 +36,7 @@ This module offers the following features:
 
 - [Menu](#menu) to display SwiftBar menus
 - [Notifications](#notification) to show notifications from a SwiftBar plugin
+- [Persistence](#persistence) to store and load data for a SwiftBar plugin
 
 Check out the features through basic examples below.
 
@@ -471,6 +472,70 @@ To trigger notifications without sound, just pass the `silent` parameter to `.sh
 
 >>> n.show(True) # pass True to show silently
 Notification(title='Title', subtitle='Subtitle', body='Body', href='https://example.com')
+```
+
+## Persistence
+
+### Basic usage
+
+To store (and later load) data for a SwiftBar plugin, do the following:
+
+```pycon
+>>> from swiftbarmenu import Persistence
+
+>>> sample_data = {
+    "data": "test",
+    "nested": {
+        "data1": "test",
+        "data2": "test"
+    }
+}
+
+>>> p = Persistence()
+>>> p.save(sample_data)
+
+>>> stored_data = p.load()
+>>> stored_data
+{'data': 'test', 'nested': {'data1': 'test', 'data2': 'test'}}
+
+>>> p.clear()
+
+>>> stored_data = p.load()
+>>> stored_data
+{}
+```
+
+> [!NOTE]
+> `.save()` method supports a `dict[str, Any]` as input and the data are stored using the [`pickle`](https://docs.python.org/3/library/pickle.html) module internally.
+
+
+### Custom file name
+
+To store (and later load) data for a SwiftBar plugin with a specific name, do the following:
+
+```pycon
+>>> from swiftbarmenu import Persistence
+
+>>> sample_data = {
+    "data": "test",
+    "nested": {
+        "data1": "test",
+        "data2": "test"
+    }
+}
+
+>>> p = Persistence("example")
+>>> p.save(sample_data)
+
+>>> stored_data = p.load()
+>>> stored_data
+{'data': 'test', 'nested': {'data1': 'test', 'data2': 'test'}}
+
+>>> p.clear()
+
+>>> stored_data = p.load()
+>>> stored_data
+{}
 ```
 
 ## Development
