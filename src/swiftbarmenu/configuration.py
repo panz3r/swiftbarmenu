@@ -16,9 +16,12 @@ class Configuration:
         )
         self.config = ConfigParser()
 
+    def section(self, name: str) -> ConfigurationSection:
+        return ConfigurationSection(self.config, name)
+
     def set(self, key: str, value: Any) -> Configuration:
         """
-        Set a configuration string value for a given key.
+        Set a configuration value for a given key.
 
         Args:
             key (str): The key for the configuration value.
@@ -70,3 +73,55 @@ class Configuration:
 
     def __str__(self):
         return (f"Configuration(path='{self.file_path}')")
+
+
+class ConfigurationSection:
+    def __init__(self, config: ConfigParser, name: str):
+        """Initialize a ConfigurationSection."""
+
+        self.config = config
+        self.name = name
+
+        if not self.config.has_section(name):
+            self.config.add_section(name)
+
+    def set(self, key: str, value: Any) -> ConfigurationSection:
+        """
+        Set a configuration  value for a given key of the section.
+
+        Args:
+            key (str): The key for the configuration value.
+            value (Any): The value to set for the given key.
+
+        Returns:
+            Configuration: This instance of Configuration for method chaining.
+        """
+
+        self.config.set(self.name, key, str(value))
+
+        return self
+
+    def get(self, key: str, default: Any = None, type: str = "str") -> Any:
+        """
+        Get a configuration value for a given key of the section.
+
+        Args:
+            key (str): The key for the configuration value.
+            default (any, optional): The default value to return if the key is not found. Defaults to `None`.
+            type (str, optional): The type of the configuration value. Defaults to "str".
+
+        Returns:
+            Any: The configuration value for the given key, or the default value if not found.
+        """
+
+        if type == "int":
+            default_v = int(default) if default else None
+            return self.config.getint(self.name, key, fallback=default_v)
+        elif type == "float":
+            default_v = float(default) if default else None
+            return self.config.getfloat(self.name, key, fallback=default_v)
+        elif type == "bool":
+            default_v = bool(default) if default else None
+            return self.config.getboolean(self.name, key, fallback=default_v)
+        else:
+            return self.config.get(self.name, key, fallback=default)
