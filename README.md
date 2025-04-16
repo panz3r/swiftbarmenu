@@ -505,9 +505,7 @@ To store (and later load) data for a SwiftBar plugin, do the following:
 {}
 ```
 
-> [!NOTE]
-> `.save()` method supports a `dict[str, Any]` as input and the data are stored using the [`pickle`](https://docs.python.org/3/library/pickle.html) module internally.
-
+> [!NOTE] > `.save()` method supports a `dict[str, Any]` as input and the data are stored using the [`pickle`](https://docs.python.org/3/library/pickle.html) module internally.
 
 ### Custom file name
 
@@ -628,6 +626,12 @@ A VS Code instance opens in your browser (or local VS Code) connected to the pre
 ## Changelog
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
+
+### 0.1.6
+
+Released 2025-04-16
+
+- Add Persistence feature via [pull request #4](https://github.com/sdelquin/swiftbarmenu/pull/4) (kudos to [`@panz3r`](https://github.com/panz3r))
 
 ### 0.1.5
 
