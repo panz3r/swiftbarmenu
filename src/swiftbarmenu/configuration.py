@@ -21,7 +21,7 @@ class Configuration:
 
     def set(self, key: str, value: Any) -> Configuration:
         """
-        Set a configuration value for a given key.
+        Set a configuration value for a given key in the 'DEFAULT' section.
 
         Args:
             key (str): The key for the configuration value.
@@ -31,13 +31,13 @@ class Configuration:
             Configuration: This instance of Configuration for method chaining.
         """
 
-        self.config.set("DEFAULT", key, str(value))
+        self.section("DEFAULT").set(key, str(value))
 
         return self
 
     def get(self, key: str, default: Any = None, type: str = "str") -> Any:
         """
-        Get a configuration value for a given key.
+        Get a configuration value for a given key in the 'DEFAULT' section.
 
         Args:
             key (str): The key for the configuration value.
@@ -48,17 +48,7 @@ class Configuration:
             Any: The configuration value for the given key, or the default value if not found.
         """
 
-        if type == "int":
-            default_v = int(default) if default else None
-            return self.config.getint("DEFAULT", key, fallback=default_v)
-        elif type == "float":
-            default_v = float(default) if default else None
-            return self.config.getfloat("DEFAULT", key, fallback=default_v)
-        elif type == "bool":
-            default_v = bool(default) if default else None
-            return self.config.getboolean("DEFAULT", key, fallback=default_v)
-        else:
-            return self.config.get("DEFAULT", key, fallback=default)
+        return self.section("DEFAULT").get(key, default, type)
 
     def persist(self) -> Configuration:
         """Persist Configuration to a file."""
@@ -82,7 +72,7 @@ class ConfigurationSection:
         self.config = config
         self.name = name
 
-        if not self.config.has_section(name):
+        if not self.name == 'DEFAULT' and not self.config.has_section(name):
             self.config.add_section(name)
 
     def set(self, key: str, value: Any) -> ConfigurationSection:
