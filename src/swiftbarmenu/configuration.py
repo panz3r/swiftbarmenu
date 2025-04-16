@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from configparser import ConfigParser
 import os
 from pathlib import Path
 
@@ -12,6 +13,15 @@ class Configuration:
             os.getenv('SWIFTBAR_PLUGIN_DATA_PATH', '.'),
             'config.ini'
         )
+        self.config = ConfigParser()
+
+    def persist(self) -> Configuration:
+        """Persist Configuration to a file."""
+
+        with self.file_path.open('w') as config_file:
+            self.config.write(config_file)
+
+        return self
 
     def __repr__(self):
         return self.__str__()
