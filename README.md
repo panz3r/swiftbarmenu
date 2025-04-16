@@ -505,7 +505,9 @@ To store (and later load) data for a SwiftBar plugin, do the following:
 {}
 ```
 
-> [!NOTE] > `.save()` method supports a `dict[str, Any]` as input and the data are stored using the [`pickle`](https://docs.python.org/3/library/pickle.html) module internally.
+<!-- prettier-ignore -->
+> [!NOTE]
+> `.save()` method supports a `dict[str, Any]` as input and the data are stored using the [`pickle`](https://docs.python.org/3/library/pickle.html) module internally.
 
 ### Custom file name
 
