@@ -1,3 +1,4 @@
+import os
 
 from src.swiftbarmenu import Configuration
 
@@ -299,3 +300,41 @@ def test_configuration_load_notexists(monkeypatch, tmp_path):
 
     # Assert
     assert c.get("test") is None
+
+
+def test_configuration_open_editor_default(mocker, monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    mocker.patch('os.system', return_value=None)
+
+    # Act
+    c = Configuration()
+    c.open_editor()
+
+    # Assert
+    os.system.assert_called_once_with(
+        f"open -a 'TextEdit' '{str(plugin_data_p / 'config.ini')}'")
+
+
+def test_configuration_open_editor_custom(mocker, monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    mocker.patch('os.system', return_value=None)
+
+    # Act
+    c = Configuration()
+    c.open_editor("Visual Studio Code")
+
+    # Assert
+    os.system.assert_called_once_with(
+        f"open -a 'Visual Studio Code' '{str(plugin_data_p / 'config.ini')}'")
