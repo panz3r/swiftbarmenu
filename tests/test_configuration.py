@@ -169,3 +169,99 @@ def test_configuration_section_set_multiple():
     assert s.get("test2", type="int") == 2
     assert s.get("test3", type="float") == 3.4
     assert s.get("test4", type="bool") is False
+
+
+def test_configuration_get_string():
+    # Arrange
+    c = Configuration()
+    c.set("test", "value")
+
+    # Act
+    result = c.get("test")
+
+    # Assert
+    assert result == "value"
+
+
+def test_configuration_get_int():
+    # Arrange
+    c = Configuration()
+    c.set("test", 1)
+
+    # Act
+    result = c.get("test", type="int")
+
+    # Assert
+    assert result == 1
+
+
+def test_configuration_get_float():
+    # Arrange
+    c = Configuration()
+    c.set("test", 2.3)
+
+    # Act
+    result = c.get("test", type="float")
+
+    # Assert
+    assert result == 2.3
+
+
+def test_configuration_get_boolean():
+    # Arrange
+    c = Configuration()
+    c.set("test", True)
+
+    # Act
+    result = c.get("test", type="bool")
+
+    # Assert
+    assert result is True
+
+
+def test_configuration_get_string_with_default():
+    # Arrange
+    c = Configuration()
+    c.set("test", "value")
+
+    # Act
+    result = c.get("nonexistent", default="default_value")
+
+    # Assert
+    assert result == "default_value"
+
+
+def test_configuration_get_int_with_default():
+    # Arrange
+    c = Configuration()
+    c.set("test", 1)
+
+    # Act
+    result = c.get("nonexistent", type="int", default=42)
+
+    # Assert
+    assert result == 42
+
+
+def test_configuration_get_float_with_default():
+    # Arrange
+    c = Configuration()
+    c.set("test", 2.3)
+
+    # Act
+    result = c.get("nonexistent", type="float", default=3.14)
+
+    # Assert
+    assert result == 3.14
+
+
+def test_configuration_get_boolean_with_default():
+    # Arrange
+    c = Configuration()
+    c.set("test", True)
+
+    # Act
+    result = c.get("nonexistent", type="bool", default=False)
+
+    # Assert
+    assert result is False
