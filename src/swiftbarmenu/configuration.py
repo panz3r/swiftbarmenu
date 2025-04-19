@@ -58,6 +58,14 @@ class Configuration:
 
         return self
 
+    def load(self) -> Configuration:
+        """Load Configuration from a file."""
+
+        if self.file_path.exists():
+            self.config.read(self.file_path)
+
+        return self
+
     def __repr__(self):
         return self.__str__()
 
