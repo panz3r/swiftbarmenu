@@ -265,3 +265,37 @@ def test_configuration_get_boolean_with_default():
 
     # Assert
     assert result is False
+
+
+def test_configuration_load(monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    Configuration().set("test", "data1").persist()
+
+    # Act
+    c = Configuration()
+    c.load()
+
+    # Assert
+    assert c.get("test") == "data1"
+
+
+def test_configuration_load_notexists(monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    # Act
+    c = Configuration()
+    c.load()
+
+    # Assert
+    assert c.get("test") is None
