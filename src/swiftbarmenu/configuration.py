@@ -66,6 +66,13 @@ class Configuration:
 
         return self
 
+    def open_editor(self, app: str = "TextEdit") -> Configuration:
+        """Open the configuration file in the specified app."""
+
+        os.system(f"open -a '{app}' '{str(self.file_path)}'")
+
+        return self
+
     def __repr__(self):
         return self.__str__()
 
