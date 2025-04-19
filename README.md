@@ -538,6 +538,105 @@ To store (and later load) data for a SwiftBar plugin with a specific name, do th
 {}
 ```
 
+## Configuration
+
+### Basic usage
+
+To manage configuration settings for a SwiftBar plugin, do the following:
+
+```pycon
+>>> from swiftbarmenu import Configuration
+
+>>> c = Configuration()
+>>> c.set("api_key", "12345")
+>>> c.set("refresh_interval", 60, type="int")
+>>> c.set("notifications_enabled", True, type="bool")
+>>> c.persist()
+
+>>> api_key = c.get("api_key")
+>>> interval = c.get("refresh_interval", type="int")
+>>> notifications = c.get("notifications_enabled", type="bool")
+
+>>> api_key
+'12345'
+>>> interval
+60
+>>> notifications
+True
+```
+
+### Loading configuration
+
+You can load an existing configuration from file:
+
+```pycon
+>>> from swiftbarmenu import Configuration
+
+>>> c = Configuration()
+>>> c.load()  # Loads configuration from file if it exists
+
+>>> # Configuration is now ready to use
+>>> api_key = c.get("api_key")
+>>> api_key
+'12345'  # Value loaded from file
+```
+
+> [!NOTE]
+> The `load()` method will silently continue if the configuration file doesn't exist yet. You can check if a value exists by providing a default value and comparing the result.
+
+### Sections
+
+You can organize your configuration into sections:
+
+```pycon
+>>> from swiftbarmenu import Configuration
+
+>>> c = Configuration()
+>>> api_section = c.section("API")
+>>> api_section.set("key", "12345")
+>>> api_section.set("endpoint", "https://api.example.com")
+
+>>> ui_section = c.section("UI")
+>>> ui_section.set("theme", "dark")
+>>> ui_section.set("font_size", 14, type="int")
+
+>>> c.persist()
+
+>>> api_section.get("key")
+'12345'
+>>> ui_section.get("font_size", type="int")
+14
+```
+
+### Default values
+
+You can provide default values when retrieving configuration:
+
+```pycon
+>>> from swiftbarmenu import Configuration
+
+>>> c = Configuration()
+>>> value = c.get("nonexistent_key", default="default_value")
+>>> value
+'default_value'
+```
+
+### Opening configuration file
+
+You can open the configuration file in your default text editor:
+
+```pycon
+>>> from swiftbarmenu import Configuration
+
+>>> c = Configuration()
+>>> c.open_editor()  # Opens in TextEdit by default
+
+>>> c.open_editor("Visual Studio Code")  # Opens in VS Code
+```
+
+> [!NOTE]
+> Configuration files are stored in the plugin's data directory and use the INI file format. The file is automatically created when you call `.persist()`.
+
 ## Development
 
 To ensure a consistent and easy-to-set-up development environment, this project provides multiple options, including configuration for [Dev Containers](https://containers.dev/).
