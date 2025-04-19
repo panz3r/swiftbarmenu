@@ -105,13 +105,13 @@ class ConfigurationSection:
         """
 
         if type == "int":
-            default_v = int(default) if default else None
+            default_v = int(default) if default is not None else None
             return self.config.getint(self.name, key, fallback=default_v)
         elif type == "float":
-            default_v = float(default) if default else None
+            default_v = float(default) if default is not None else None
             return self.config.getfloat(self.name, key, fallback=default_v)
         elif type == "bool":
-            default_v = bool(default) if default else None
+            default_v = bool(default) if default is not None else None
             return self.config.getboolean(self.name, key, fallback=default_v)
         else:
             return self.config.get(self.name, key, fallback=default)
