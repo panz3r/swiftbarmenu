@@ -268,6 +268,23 @@ def test_configuration_get_boolean_with_default():
     assert result is False
 
 
+def test_configuration_autoload(monkeypatch, tmp_path):
+    # Arrange
+    plugin_data_p = tmp_path / "test.1h.py"
+    plugin_data_p.mkdir()
+
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_DATA_PATH', plugin_data_p.as_posix())
+    monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
+
+    Configuration().set("test", "data2").persist()
+
+    # Act
+    c = Configuration()
+
+    # Assert
+    assert c.get("test") == "data2"
+
+
 def test_configuration_load(monkeypatch, tmp_path):
     # Arrange
     plugin_data_p = tmp_path / "test.1h.py"
@@ -279,7 +296,7 @@ def test_configuration_load(monkeypatch, tmp_path):
     Configuration().set("test", "data1").persist()
 
     # Act
-    c = Configuration()
+    c = Configuration(auto_load=False)
     c.load()
 
     # Assert
@@ -295,7 +312,7 @@ def test_configuration_load_notexists(monkeypatch, tmp_path):
     monkeypatch.setenv('SWIFTBAR_PLUGIN_PATH', '/sbm/plugins/test.1h.py')
 
     # Act
-    c = Configuration()
+    c = Configuration(auto_load=False)
     c.load()
 
     # Assert
