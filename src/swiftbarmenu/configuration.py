@@ -7,7 +7,7 @@ from typing import Any
 
 
 class Configuration:
-    def __init__(self):
+    def __init__(self, auto_load: bool = True):
         """Initialize a Configuration."""
 
         self.file_path = Path(
@@ -15,6 +15,9 @@ class Configuration:
             'config.ini'
         )
         self.config = ConfigParser()
+
+        if auto_load and self.exists():
+            self.load()
 
     def section(self, name: str) -> ConfigurationSection:
         return ConfigurationSection(self.config, name)
@@ -50,6 +53,11 @@ class Configuration:
 
         return self.section("DEFAULT").get(key, default, type)
 
+    def exists(self) -> bool:
+        """Check if a persist Configuration file already exists."""
+
+        return self.file_path.exists()
+
     def persist(self) -> Configuration:
         """Persist Configuration to a file."""
 
@@ -61,7 +69,7 @@ class Configuration:
     def load(self) -> Configuration:
         """Load Configuration from a file."""
 
-        if self.file_path.exists():
+        if self.exists():
             self.config.read(self.file_path)
 
         return self
