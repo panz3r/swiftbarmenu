@@ -565,6 +565,22 @@ To manage configuration settings for a SwiftBar plugin, do the following:
 True
 ```
 
+### Check configuration existence
+
+You can check if a configuration file already exists:
+
+```pycon
+>>> from swiftbarmenu import Configuration
+
+>>> c = Configuration()
+>>> c.exists()
+False
+
+>>> c.persist()
+>>> c.exists()
+True
+```
+
 ### Loading configuration
 
 You can load an existing configuration from file:
@@ -572,7 +588,7 @@ You can load an existing configuration from file:
 ```pycon
 >>> from swiftbarmenu import Configuration
 
->>> c = Configuration()
+>>> c = Configuration(auto_load=False) # Disable configuration auto-loading
 >>> c.load()  # Loads configuration from file if it exists
 
 >>> # Configuration is now ready to use
@@ -580,6 +596,9 @@ You can load an existing configuration from file:
 >>> api_key
 '12345'  # Value loaded from file
 ```
+
+> [!WARNING]
+> The `load()` method will be automatically invoked unless the `auto_load` parameter is set to `False` when instantiating a new `Configuration` instance.
 
 > [!NOTE]
 > The `load()` method will silently continue if the configuration file doesn't exist yet. You can check if a value exists by providing a default value and comparing the result.
