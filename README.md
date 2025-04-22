@@ -747,6 +747,12 @@ A VS Code instance opens in your browser (or local VS Code) connected to the pre
 
 Releases use [Semantic Versioning](https://semver.org/) (`<major>.<minor>.<patch>`).
 
+### 0.1.7
+
+Released 2025-04-22
+
+- Add Configuration management feature via [pull request #5](https://github.com/sdelquin/swiftbarmenu/pull/5) (kudos to [`@panz3r`](https://github.com/panz3r))
+
 ### 0.1.6
 
 Released 2025-04-16
